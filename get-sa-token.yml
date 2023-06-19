@@ -1,0 +1,19 @@
+- name: Get SA Token playbook
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Debug information
+      ansible.builtin.debug:
+        msg: "ServiceAccount in namespace '{{ ansible_eda.event.resource.metadata.namespace }}' with name '{{ ansible_eda.event.resource.metadata.name }}‘ {{ ansible_eda.event.type | capitalize }}’ "
+
+    - name: Creating token for SA '{{ ansible_eda.event.resource.metadata.name }}‘
+      ansible.builtin.command: oc create token -n {{ ansible_eda.event.resource.metadata.namespace }} {{ ansible_eda.event.resource.metadata.name }}
+      register: output
+
+    - name: Show SA token
+      ansible.builtin.debug:
+        var: output.stdout
+      when: output.failed == false
+
+      
+        
