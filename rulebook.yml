@@ -1,4 +1,4 @@
-- name: Listen for newly added ConfigMap resources
+- name: "Listen for newly added ServiceAccount resources"
   hosts: all
   sources:
     - sabre1041.eda.k8s:
