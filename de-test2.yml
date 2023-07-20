@@ -1,0 +1,27 @@
+version: 3
+
+images:
+  base_image:
+    name: 'registry.redhat.io/ansible-automation-platform-24/de-minimal-rhel8:latest'
+
+dependencies:
+  galaxy:
+    collections:
+      - ansible.eda
+      - sabre1041.eda
+  python:
+    - six
+    - psutil
+    - botocore
+    - openshift
+  system:
+    - pkg-config [platform:rpm]
+    - systemd-devel [platform:rpm]
+    - gcc [platform:rpm]
+    - python39-devel [platform:rpm]
+    - vi [platform:rpm]
+  python_interpreter:
+    package_system: "python39"
+
+options:
+  package_manager_path: /usr/bin/microdnf
